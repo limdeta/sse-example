@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SSE Example</title>
+    <style> 
+        .event-message-div { 
+            border: 2px solid rgb(189, 189, 189);
+            background: linear-gradient(to bottom, rgb(202, 202, 202), white);
+            border-radius: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 10px;
+            padding: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <script src="https://unpkg.com/htmx-ext-sse@2.2.2/sse.js"></script>
+</head>
+<body>
+    <h4>SSE HTMX test</h4>
+    <div id="dashboard-feed"></div>
+    <div 
+        hx-ext="sse"
+        sse-connect="http://localhost:8080/events" 
+        sse-swap="message"
+        hx-target="#dashboard-feed"
+        hx-swap="afterend swap:1s">
+    </div>
+
+    <!-- <script>
+        const eventSource = new EventSource('http://localhost:8080/events');
+        eventSource.onmessage = function(event) {
+            const dataElement = document.getElementById('sse-data');
+            var jsonevent = JSON.parse(event.data);
+            dataElement.innerHTML += jsonevent.message + '<br>';
+        };
+    </script> -->
+</body>
+</html>
